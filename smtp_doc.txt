@@ -1,0 +1,65 @@
+Laravel SMTP doc:
+
+Step 1 : https://medium.com/@agavitalis/how-to-send-an-email-in-laravel-using-gmail-smtp-server-53d962f01a0c
+Step 2 : For less secured app option - https://devanswers.co/allow-less-secure-apps-access-gmail-account/
+Step 3 : [ For less secured option app link ] 
+https://accounts.google.com/signin/v2/challenge/pwd?continue=https%3A%2F%2Fmyaccount.google.com%2Flesssecureapps&service=accountsettings&osid=1&rart=ANgoxcdx_eVf8seaKfPlzJn3bg10QB6m0PISc6ablyz06DgmgTKnh1UXpRdL2pGQgB4zF0HCdJy2vyMJcDsm92hDkqYi2JMA7Q&TL=AM3QAYZ7_4RTQ-ouUGMiCjXf6q_G67TJ9rzOG7lpxSgyV7D-yfvSwnSBJtSYSaxT&flowName=GlifWebSignIn&cid=1&flowEntry=ServiceLogin
+
+Step 4 : After moving settings to less secured apps then create a laravel project
+
+Step 5 : set .env settings,
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.googlemail.com
+MAIL_PORT=465
+MAIL_USERNAME=tahmid63@dipti.com.bd
+MAIL_PASSWORD=nlctahmid
+MAIL_ENCRYPTION=ssl
+
+Step 6 : On command line write, composer require guzzlehttp/guzzle
+Step 7 : After installing guzzleHttp go to vendor/guzzlehttp/guzzle/src/Client.php,
+
+$defaults = [
+            'allow_redirects' => RedirectMiddleware::$defaultSettings,
+            'http_errors'     => true,
+            'decode_content'  => true,
+            'verify'          => false,
+            'cookies'         => false,
+            'idn_conversion'  => false,
+        ];
+        
+// change 'verify' to false.
+
+Step 8 : Finally SMTP will be set-up and the route file and view file example will be written like this,
+
+// route flie example,
+
+Route::get('send-mail', function () {
+
+    $data = [
+        'title' => 'Hello sadman',
+        'content' => 'This is the contant'
+    ];
+
+    Mail::send('emails.mail', $data, function ($message) {
+        $message->to("sdmn.ahmd@gmail.com","Tahmid")->subject("Hello how are you?");
+    });
+
+});
+
+//mail.blade.php file example,
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ $title }}</h1>
+    <p>{{ $content }}</p>
+</body>
+</html>
+
