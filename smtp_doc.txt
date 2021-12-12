@@ -12,8 +12,8 @@ Step 5 : set .env settings,
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.googlemail.com
 MAIL_PORT=465
-MAIL_USERNAME=tahmid63@dipti.com.bd
-MAIL_PASSWORD=nlctahmid
+MAIL_USERNAME=place_gmail_email
+MAIL_PASSWORD=place_password
 MAIL_ENCRYPTION=ssl
 
 Step 6 : On command line write, composer require guzzlehttp/guzzle
